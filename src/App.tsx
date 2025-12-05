@@ -1,4 +1,5 @@
 import './App.css'
+import About from './components/About'
 import Banner from './components/Banner'
 import Navbar from './components/Navbar'
 
@@ -8,6 +9,7 @@ function App() {
     <main className='relative'>
       <Navbar />
       <Banner />
+      <About />
     </main>
   )
 }

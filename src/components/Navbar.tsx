@@ -15,8 +15,8 @@ const Navbar = () => {
     }, [])
 
   return (
-    <nav className={`flex justify-between py-3 transition-all duration-300 px-39 ${scrolled ? "shadow-md" : "bg-gray-100"}`}>
-      <img src={logo} alt="logo" className="w-15 h-18" />
+    <nav className={`fixed w-full flex justify-between py-3 bg-gray-100 transition-all duration-300 px-39 ${scrolled ? "shadow-md z-999" : ""}`}>
+      <img src={logo} alt="logo" className="w-11 h-12" />
 
       <ul className="flex items-center gap-9">
         {menuItem.map((item: any) => {
