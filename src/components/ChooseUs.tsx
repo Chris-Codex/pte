@@ -7,7 +7,7 @@ import ChooseCard from "./ChooseeCard";
 
 const ChooseUs = () => {
     return (
-        <section className="bg-gray-100 w-full pt-10 pb-20 lg:pt-20">
+        <section className="bg-gray-100 w-full pt-10 pb-20 lg:pt-20" id="choose">
             <SectionTitle title="Why Choose Us" subtitle="What makes our PTE training program stand out" />
 
             <div className="flex items-center justify-center w-full">

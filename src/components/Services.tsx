@@ -7,7 +7,7 @@ import { IoVideocamOutline } from "react-icons/io5";
 
 const Services = () => {
     return (
-        <section className="bg-gray-50 w-full pt-10 pb-20 lg:pt-20">
+        <section className="bg-gray-50 w-full pt-10 pb-20 lg:pt-20" id="services">
             <SectionTitle title="Our Services" subtitle="Comprehensive training covering all aspects of the PTE Academic exam" />
 
             <div className="flex items-center justify-center w-full">

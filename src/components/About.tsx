@@ -4,7 +4,7 @@ import SectionTitle from "./SectionnTitle";
 
 const About = () => {
     return (
-        <section className="bg-gray-100 w-full pt-10 pb-20 lg:pt-20">
+        <section className="bg-gray-100 w-full pt-10 pb-20 lg:pt-20" id="about">
             <SectionTitle title="About Our Training" subtitle="Your path to PTE success starts here" />
 
             <div className="flex justify-center mt-10 mx-5">

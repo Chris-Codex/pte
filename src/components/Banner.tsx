@@ -7,7 +7,7 @@ import { IoAnalytics } from "react-icons/io5";
 
 const Banner = () => {
     return (
-        <section className="bg-gray-200 pb-30">
+        <section className="bg-gray-200 pb-30" id='home'>
             <div className="flex flex-col items-center justify-center pt-10 md:pt-40">
                 <h1 className="text-5xl text-center w-80 md:w-full lg:w-full md:text-7xl font-bold text-[#0B2752]">Master Your PTE Exam</h1>
                 <h1 className="text-5xl text-center md:text-7xl text-amber-500 font-bold">With Expert Guidance</h1>

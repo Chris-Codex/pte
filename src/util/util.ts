@@ -2,14 +2,15 @@ import type { menuItem } from "../types/menu";
 
 
 export const menuListData: menuItem[] = [
-  { id: 1, label: "Home" },
-  { id: 2, label: "About" },
-  { id: 3, label: "Services" },
-  { id: 4, label: "Why Us" },
-  { id: 5, label: "Upcoming Classes" },
-  { id: 6, label: "Contact" },
-  { id: 7, label: "Get Started" },
+  { id: 1, label: "Home", targetId: "home" },
+  { id: 2, label: "About", targetId: "about" },
+  { id: 3, label: "Services", targetId: "services" },
+  { id: 4, label: "Why Us", targetId: "why-us" },
+  { id: 5, label: "Upcoming Classes", targetId: "upcoming" },
+  { id: 6, label: "Contact", targetId: "contact" },
+  { id: 7, label: "Get Started", targetId: "contact" },
 ];
+
 
 
 

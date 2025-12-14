@@ -1,5 +1,3 @@
-
-
 type ContactInfoProps = {
     Icon: React.ElementType;
     phone: string;
