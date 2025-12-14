@@ -1,3 +1,5 @@
+import { GoBook } from "react-icons/go";
+
 type ClassesProps = {
   category: string;
   seats: string;
@@ -15,8 +17,7 @@ type ClassesProps = {
 
 };
 
-import { GoBook } from "react-icons/go";
-import type { UpcomingItems } from "../types/upcoming";
+
 
 
 const ClassesCard = ({
