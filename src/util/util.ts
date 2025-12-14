@@ -1,25 +1,35 @@
-import type {menuItem} from "../types/menu";
-import { RiBookOpenLine } from "react-icons/ri";
-import { GoDotFill } from "react-icons/go";
-import { GrNotes } from "react-icons/gr";
-import { IoMdVideocam } from "react-icons/io";
+import type { menuItem } from "../types/menu";
+import type { UpcomingItems } from "../types/upcoming";
 
-const menuListData: menuItem[] = [
-    { id: 1, label: "Home" },
-    { id: 2, label: "About" },
-    { id: 3, label: "Services" },
-    { id: 4, label: "Why Us" },
-    { id: 5, label: "Upcoming Classes" },
-    { id: 6, label: "Contact" },
-    { id: 7, label: "Get Started" }
-]
-
-export default menuListData;
+export const menuListData: menuItem[] = [
+  { id: 1, label: "Home" },
+  { id: 2, label: "About" },
+  { id: 3, label: "Services" },
+  { id: 4, label: "Why Us" },
+  { id: 5, label: "Upcoming Classes" },
+  { id: 6, label: "Contact" },
+  { id: 7, label: "Get Started" },
+];
 
 
-const serviceCardData = [
-    {id: 1, title: "A", Icon: RiBookOpenLine},
-    {id: 2, title: "B", Icon: GoDotFill},
-    {id: 3, title: "", Icon: GrNotes},
-    {id: 4, title: "", Icon: IoMdVideocam}
-]
+
+export const upcomingList: UpcomingItems[] = [
+  {
+    data_one: [
+      { id: 1, title: "Read Aloud" },
+      { id: 2, title: "Repeat Sentence" },
+      { id: 3, title: "Describe Image" },
+    ],
+    data_two: [
+      { id: 1, title: "Essay Writing" },
+      { id: 2, title: "Summarize Written Text" },
+      { id: 3, title: "Templates" },
+    ],
+    data_three: [
+      { id: 1, title: "Complete PTE Practice" },
+      { id: 2, title: "Score Analysis" },
+      { id: 3, title: "Feedback Session" },
+    ],
+  },
+];
+

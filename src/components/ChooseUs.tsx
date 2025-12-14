@@ -12,7 +12,6 @@ const ChooseUs = () => {
 
             <div className="flex items-center justify-center w-full">
                 <div className="w-[1000px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7 mt-15 mx-5 lg:mx-0">
-
                     <ChooseCard Icon={FiTarget}
                         heading="Result-Oriented Approach" 
                         title="Our teaching methodology is specifically designed to help you achieve your target score efficiently."
@@ -31,12 +30,7 @@ const ChooseUs = () => {
                     <ChooseCard Icon={IoTrophyOutline}
                         heading="Proven Track Record" 
                         title="Join hundreds of successful students who achieved their dream scores with our guidance."
-                    />
-                    
-    
-
-
-                    
+                    />   
                 </div>
             </div>
         </section>
