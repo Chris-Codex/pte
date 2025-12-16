@@ -11,7 +11,7 @@ const Services = () => {
             <SectionTitle title="Our Services" subtitle="Comprehensive training covering all aspects of the PTE Academic exam" />
 
             <div className="flex items-center justify-center w-full">
-                <div className="w-[1300px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 mt-15 mx-5 lg:mx-0">
+                <div className="w-[1300px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 mt-15 mx-5 md:px-5 lg:mx-0">
                     <div className="border-2 border-gray-300 hover:border-[#f59e0b] rounded-lg shadow-sm px-5 pt-5 pb-5">
                         <RiBookOpenLine size={50} color="#f59e0b" />
                         <h3 className="text-xl font-medium text-[#0B2752] pt-6">Speaking & Writing</h3>

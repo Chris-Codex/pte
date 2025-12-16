@@ -3,7 +3,7 @@ type customButtonProps = {
     classes: string;
 }
 
-const CustomBtn = ({ text, classes}: customButtonProps) => {
+const CustomBtn = ({ text, classes }: customButtonProps) => {
     return (
         <button className={`${classes}`}>{text}</button>
     )

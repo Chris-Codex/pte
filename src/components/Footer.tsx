@@ -7,8 +7,8 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
        
         <div>
-          <div className="bg-white w-25 h-25 flex justify-center items-center rounded-md">
-            <img src={logo} alt="PTE Excellence Logo" className="w-20 h-20" />
+          <div className="bg-white w-20 h-20 flex justify-center items-center rounded-md">
+            <img src={logo} alt="PTE Excellence Logo" className="w-15 h-15" />
           </div>
           <p className="mt-4 opacity-80">
             Your trusted partner for <br></br> PTE exam preparation.
