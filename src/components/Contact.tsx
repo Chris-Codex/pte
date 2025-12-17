@@ -107,10 +107,6 @@ const Contact = () => {
           />
         </div>
 
-        <form name="contact" data-netlify="true" hidden>
-          <input type="hidden" name="form-name" value="contact" />
-        </form>
-
         <form
           name="contact"
           method="POST"
