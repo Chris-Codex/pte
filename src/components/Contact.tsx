@@ -1,21 +1,13 @@
-import { useState } from "react";
 import ContactInfo from "./ContactInfo";
 import SectionTitle from "./SectionnTitle";
 import { FiPhone } from "react-icons/fi";
 import { AiOutlineMail } from "react-icons/ai";
 import { MdOutlineLocationOn } from "react-icons/md";
+import { useState } from "react";
 import type { formError, formType } from "../types/form";
 
 
-const encode = (data: Record<string, string>) =>
-  Object.keys(data)
-    .map(
-      key =>
-        encodeURIComponent(key) +
-        "=" +
-        encodeURIComponent(data[key])
-    )
-    .join("&");
+const encode = (data: Record<string, string>) => Object.keys(data).map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])).join("&")
 
 const Contact = () => {
   const [form, setForm] = useState<formType>({
@@ -24,7 +16,6 @@ const Contact = () => {
     phone: "",
     message: "",
   });
-
   const [errors, setErrors] = useState<formError>({});
   const [success, setSuccess] = useState(false);
 
@@ -32,54 +23,56 @@ const Contact = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setForm(prev => ({ ...prev, [name]: value }));
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const validate = (): formError => {
-    const newErrors: formError = {};
+  const validation = () => {
+    const newError: formError = {};
 
-    if (!form.name) newErrors.name = "Name is required";
-    if (!form.email || !form.email.includes("@"))
-      newErrors.email = "Valid email is required";
-    if (!form.phone) newErrors.phone = "Phone number is required";
-    if (!form.message) newErrors.message = "Message is required";
+    if (!form.name) newError.name = "Name is required";
+    if (!form.email.includes("@")) newError.email = "Email is required";
+    if (!form.phone) newError.phone = "Phone number is required";
+    if (!form.message) newError.message = "Message is required";
 
-    return newErrors;
+    return newError;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSuccess(false);
 
-    const validationErrors = validate();
-    setErrors(validationErrors);
+    const validationError = validation();
+    setErrors(validationError);
 
-    if (Object.keys(validationErrors).length !== 0) return;
+    if (Object.keys(validationError).length === 0) {
+      try {
+        await fetch("/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: encode({
+            "form-name": "contact",
+            name: form.name,
+            email: form.email,
+            phone: form.phone,
+            message: form.message,
+          }),
+        });
+        console.log("Form Submitted:", form);
 
-    try {
-      await fetch("/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: encode({
-          "form-name": "contact",
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          message: form.message,
-        }),
-      });
-
-      setSuccess(true);
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
-    } catch (error) {
-      console.error("Netlify form submission error:", error);
+        setForm({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+      } catch (error) {
+        console.error("Netlify form submission error:", error);
+      }
     }
   };
 
@@ -90,14 +83,14 @@ const Contact = () => {
         subtitle="Ready to start your PTE journey? Contact us today"
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mx-5 md:mx-10 lg:mx-32 mt-10">
-        {/* Contact Info */}
-        <div>
-          <h2 className="text-2xl text-[#0B2752] font-semibold">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-15 mx-5 md:mx-10 lg:mx-70 mt-5 lg:mt-15">
+        <div className="">
+          <h1 className="text-2xl text-[#0B2752] font-semibold">
             Contact Information
-          </h2>
-          <p className="text-gray-600 mt-4">
-            Have questions? We'd love to hear from you.
+          </h1>
+          <p className="text-gray-600 pt-4 lg:pt-8">
+            Have questions? We'd love to hear from you. Send us a message and
+            we'll respond as soon as possible.
           </p>
 
           <ContactInfo Icon={FiPhone} phone="Phone" number="08035444998" />
@@ -109,11 +102,10 @@ const Contact = () => {
           <ContactInfo
             Icon={MdOutlineLocationOn}
             phone="Location"
-            number="Online – Via Zoom"
+            number="Online - Via Zoom"
           />
         </div>
 
-        {/* Form */}
         <form
           name="contact"
           method="POST"
