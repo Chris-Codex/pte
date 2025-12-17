@@ -54,7 +54,7 @@ const Contact = () => {
 
 
   return (
-    <section className="pt-20 pb-20" id="contact">
+    <section className="pt-20 pb-20 bg-gray-100" id="contact">
       <SectionTitle
         title="Get In Touch"
         subtitle="Ready to start your PTE journey? Contact us today"
