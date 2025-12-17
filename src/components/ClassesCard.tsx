@@ -1,5 +1,5 @@
 import { GoBook } from "react-icons/go";
-import payWithPaystack from "./PaystackButton";
+import payWithPaystack from "../util/PaystackButton";
 
 type ClassesProps = {
   category: string;
@@ -49,7 +49,7 @@ const ClassesCard = ({
   };
 
   return (
-    <div className="border-2 border-gray-300 w-80 md:w-full lg:w-100  mt-15 hover:border-[#f59e0b] rounded-lg shadow-sm  pb-5">
+    <div className="border-2 border-gray-300 w-80 md:w-85 lg:w-100  mt-15 hover:border-[#f59e0b] rounded-lg shadow-sm  pb-5">
       <div className="w-full px-5 pt-5 pb-5 bg-[#f49d250d]">
         <div className="flex justify-between">
           <div className="flex items-center justify-center px-2 rounded-2xl bg-[#f59e0b] text-[13px] text-white">

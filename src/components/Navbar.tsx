@@ -24,11 +24,14 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed w-full flex justify-between items-center py-3 px-48 bg-gray-200 transition-all duration-300 
-      ${scrolled ? "shadow-md z-50" : ""}`}
+      className={`fixed w-full flex justify-between items-center py-3 
+      px-6 md:px-12 lg:px-48 bg-[#0A1B3A] transition-all duration-300 
+      ${scrolled ? "shadow-md z-50 bg-[#14284d]" : ""}`}
     >
       {/* Logo */}
-      <img src={logo} alt="logo" className="w-11 h-12" />
+      <div className="bg-white p-1 rounded-md">
+        <img src={logo} alt="logo" className="w-11 h-12" />
+      </div>
 
       {/* Desktop Menu (only on large screens) */}
       <ul className="hidden lg:flex items-center gap-9">
@@ -36,7 +39,7 @@ const Navbar = () => {
           <li
             key={item.id}
             onClick={() => handleScroll(item.targetId)}
-            className={`cursor-pointer ${
+            className={`cursor-pointer text-white ${
               item.id === 7
                 ? "bg-amber-500 px-4 h-10 flex items-center rounded-md text-white"
                 : "hover:text-amber-500"
@@ -52,7 +55,7 @@ const Navbar = () => {
         className="lg:hidden text-3xl"
         onClick={() => setOpen((prev) => !prev)}
       >
-        {open ? <HiX /> : <HiMenu />}
+        {open ? <HiX color="white" /> : <HiMenu color="white" />}
       </button>
 
       {/* Mobile & Tablet Menu Panel */}

@@ -60,7 +60,7 @@ const Contact = () => {
         subtitle="Ready to start your PTE journey? Contact us today"
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-15 mx-5 md:px-5 lg:mx-70 mt-5 lg:mt-15">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-15 mx-5 md:mx-10 lg:mx-70 mt-5 lg:mt-15">
         <div className="">
           <h1 className="text-2xl text-[#0B2752] font-semibold">
             Contact Information
