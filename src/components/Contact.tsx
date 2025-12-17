@@ -73,12 +73,12 @@ const Contact = () => {
           <ContactInfo
             Icon={FiPhone}
             phone="Phone"
-            number="+1 (555) 123-4567"
+            number="08035444998"
           />
           <ContactInfo
             Icon={AiOutlineMail}
             phone="Email"
-            number="contact@pteexcellence.com"
+            number="dptetutorials@gmail.com"
           />
           <ContactInfo
             Icon={MdOutlineLocationOn}
