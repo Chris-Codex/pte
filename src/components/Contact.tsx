@@ -43,6 +43,7 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSuccess(false);
 
     const validationError = validation();
     setErrors(validationError);
