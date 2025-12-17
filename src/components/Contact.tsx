@@ -1,10 +1,21 @@
+import { useState } from "react";
 import ContactInfo from "./ContactInfo";
 import SectionTitle from "./SectionnTitle";
 import { FiPhone } from "react-icons/fi";
 import { AiOutlineMail } from "react-icons/ai";
 import { MdOutlineLocationOn } from "react-icons/md";
-import { useState } from "react";
 import type { formError, formType } from "../types/form";
+
+
+const encode = (data: Record<string, string>) =>
+  Object.keys(data)
+    .map(
+      key =>
+        encodeURIComponent(key) +
+        "=" +
+        encodeURIComponent(data[key])
+    )
+    .join("&");
 
 const Contact = () => {
   const [form, setForm] = useState<formType>({
@@ -13,45 +24,62 @@ const Contact = () => {
     phone: "",
     message: "",
   });
-  const [error, setErrors] = useState<formError>({});
+
+  const [errors, setErrors] = useState<formError>({});
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setForm(prev => ({ ...prev, [name]: value }));
   };
 
-  const validation = () => {
-    const newError: formError = {};
+  const validate = (): formError => {
+    const newErrors: formError = {};
 
-    if (!form.name) newError.name = "Name is required";
-    if (!form.email.includes("@")) newError.email = "Email is required";
-    if (!form.phone) newError.phone = "Phone number is required";
-    if (!form.message) newError.message = "Message is required";
+    if (!form.name) newErrors.name = "Name is required";
+    if (!form.email || !form.email.includes("@"))
+      newErrors.email = "Valid email is required";
+    if (!form.phone) newErrors.phone = "Phone number is required";
+    if (!form.message) newErrors.message = "Message is required";
 
-    return newError;
+    return newErrors;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSuccess(false);
 
-    const validationError = validation();
-    setErrors(validationError);
+    const validationErrors = validate();
+    setErrors(validationErrors);
 
-    if (Object.keys(validationError).length === 0) {
-      console.log("Form Submitted:", form);
+    if (Object.keys(validationErrors).length !== 0) return;
 
+    try {
+      await fetch("/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: encode({
+          "form-name": "contact",
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          message: form.message,
+        }),
+      });
+
+      setSuccess(true);
       setForm({
         name: "",
         email: "",
         phone: "",
         message: "",
       });
+    } catch (error) {
+      console.error("Netlify form submission error:", error);
     }
   };
 
@@ -62,14 +90,14 @@ const Contact = () => {
         subtitle="Ready to start your PTE journey? Contact us today"
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-15 mx-5 md:mx-10 lg:mx-70 mt-5 lg:mt-15">
-        <div className="">
-          <h1 className="text-2xl text-[#0B2752] font-semibold">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mx-5 md:mx-10 lg:mx-32 mt-10">
+        {/* Contact Info */}
+        <div>
+          <h2 className="text-2xl text-[#0B2752] font-semibold">
             Contact Information
-          </h1>
-          <p className="text-gray-600 pt-4 lg:pt-8">
-            Have questions? We'd love to hear from you. Send us a message and
-            we'll respond as soon as possible.
+          </h2>
+          <p className="text-gray-600 mt-4">
+            Have questions? We'd love to hear from you.
           </p>
 
           <ContactInfo Icon={FiPhone} phone="Phone" number="08035444998" />
@@ -81,79 +109,100 @@ const Contact = () => {
           <ContactInfo
             Icon={MdOutlineLocationOn}
             phone="Location"
-            number="Online - Via Zoom"
+            number="Online – Via Zoom"
           />
         </div>
 
+        {/* Form */}
         <form
           name="contact"
           method="POST"
           data-netlify="true"
           netlify-honeypot="bot-field"
           onSubmit={handleSubmit}
+          className="bg-white p-6 rounded-md shadow-md"
         >
-          <div className="flex flex-col">
-            <label className="text-[#0B2752]                                                                                                                                            ">
-              Full Name<span> *</span>
+          {/* REQUIRED Netlify fields */}
+          <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="bot-field" />
+
+          {/* Name */}
+          <div className="flex flex-col mb-4">
+            <label className="text-[#0B2752] font-medium">
+              Full Name *
             </label>
             <input
               type="text"
               name="name"
               value={form.name}
               onChange={handleChange}
-              placeholder="Your name"
-              className="mt-2 w-full border-gray-300 border-2 h-10 rounded-md px-3"
+              className="mt-2 border border-gray-300 rounded-md px-3 h-10"
             />
-            {error && <span className="text-red-500">{error.name}</span>}
+            {errors.name && (
+              <span className="text-red-500 text-sm">{errors.name}</span>
+            )}
           </div>
 
-          <div className="flex flex-col mt-6">
-            <label className="text-[#0B2752]                                                                                                                                            ">
-              Email Address<span> *</span>
+          {/* Email */}
+          <div className="flex flex-col mb-4">
+            <label className="text-[#0B2752] font-medium">
+              Email Address *
             </label>
             <input
               type="email"
               name="email"
               value={form.email}
               onChange={handleChange}
-              placeholder="your.email@example.com"
-              className="mt-2 w-full border-gray-300 border-2 h-10 rounded-md px-3"
+              className="mt-2 border border-gray-300 rounded-md px-3 h-10"
             />
-            {error && <span className="text-red-500">{error.email}</span>}
+            {errors.email && (
+              <span className="text-red-500 text-sm">{errors.email}</span>
+            )}
           </div>
 
-          <div className="flex flex-col mt-6">
-            <label className="text-[#0B2752]                                                                                                                                            ">
-              Phone Number<span> *</span>
+          {/* Phone */}
+          <div className="flex flex-col mb-4">
+            <label className="text-[#0B2752] font-medium">
+              Phone Number *
             </label>
             <input
               type="text"
               name="phone"
               value={form.phone}
               onChange={handleChange}
-              placeholder="+234898468833"
-              className="mt-2 w-full border-gray-300 border-2 h-10 rounded-md px-3"
+              className="mt-2 border border-gray-300 rounded-md px-3 h-10"
             />
-            {error && <span className="text-red-500">{error.phone}</span>}
+            {errors.phone && (
+              <span className="text-red-500 text-sm">{errors.phone}</span>
+            )}
           </div>
 
-          <div className="flex flex-col mt-6">
-            <label className="text-[#0B2752]                                                                                                                                            ">
-              Message<span> *</span>
+          {/* Message */}
+          <div className="flex flex-col mb-4">
+            <label className="text-[#0B2752] font-medium">
+              Message *
             </label>
             <textarea
-              placeholder="Tell us about your PTE goals..."
               name="message"
               value={form.message}
               onChange={handleChange}
-              className="mt-2 w-full border-gray-300 border-2 h-10 rounded-md px-3"
-            ></textarea>
-            {error && <span className="text-red-500">{error.message}</span>}
+              className="mt-2 border border-gray-300 rounded-md px-3 h-28"
+            />
+            {errors.message && (
+              <span className="text-red-500 text-sm">{errors.message}</span>
+            )}
           </div>
+
+          {/* Success message */}
+          {success && (
+            <p className="text-green-600 mb-4">
+              Message sent successfully! We’ll get back to you shortly.
+            </p>
+          )}
 
           <button
             type="submit"
-            className="bg-[#f59e0b] w-full py-3 cursor-pointer rounded-md mt-4 text-white text-[18px]"
+            className="bg-[#f59e0b] w-full py-3 rounded-md text-white text-lg hover:bg-amber-600 transition"
           >
             Send Message
           </button>
