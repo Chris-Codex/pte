@@ -7,51 +7,53 @@ import { useState } from "react";
 import type { formError, formType } from "../types/form";
 
 const Contact = () => {
-    const [form, setForm] = useState<formType>({
+  const [form, setForm] = useState<formType>({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [error, setErrors] = useState<formError>({});
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const validation = () => {
+    const newError: formError = {};
+
+    if (!form.name) newError.name = "Name is required";
+    if (!form.email.includes("@")) newError.email = "Email is required";
+    if (!form.phone) newError.phone = "Phone number is required";
+    if (!form.message) newError.message = "Message is required";
+
+    return newError;
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const validationError = validation();
+    setErrors(validationError);
+
+    if (Object.keys(validationError).length === 0) {
+      console.log("Form Submitted:", form);
+
+      setForm({
         name: "",
         email: "",
         phone: "",
-        message: ""
-    })
-    const [error, setErrors] = useState<formError>({})
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-
-        setForm(prev => ({
-            ...prev, [name]: value
-        }));
+        message: "",
+      });
     }
-
-    const validation = () => {
-        const newError: formError = {};
-
-        if (!form.name) newError.name = "Name is required";
-        if (!form.email.includes("@")) newError.email = "Email is required";
-        if (!form.phone) newError.phone = "Phone number is required";
-        if (!form.message) newError.message = "Message is required";
-
-        return newError;
-    }
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const validationError = validation();
-        setErrors(validationError)
-
-        if (Object.keys(validationError).length === 0) {
-            console.log("Form Submitted:", form)
-
-            setForm({
-                name: "",
-                email: "",
-                phone: "",
-                message: ""
-            })
-        }
-    }
-
+  };
 
   return (
     <section className="pt-20 pb-20 bg-gray-100" id="contact">
@@ -70,11 +72,7 @@ const Contact = () => {
             we'll respond as soon as possible.
           </p>
 
-          <ContactInfo
-            Icon={FiPhone}
-            phone="Phone"
-            number="08035444998"
-          />
+          <ContactInfo Icon={FiPhone} phone="Phone" number="08035444998" />
           <ContactInfo
             Icon={AiOutlineMail}
             phone="Email"
@@ -87,7 +85,13 @@ const Contact = () => {
           />
         </div>
 
-        <form className="" onSubmit={handleSubmit}>
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          onSubmit={handleSubmit}
+        >
           <div className="flex flex-col">
             <label className="text-[#0B2752]                                                                                                                                            ">
               Full Name<span> *</span>
@@ -115,7 +119,7 @@ const Contact = () => {
               placeholder="your.email@example.com"
               className="mt-2 w-full border-gray-300 border-2 h-10 rounded-md px-3"
             />
-             {error && <span className="text-red-500">{error.email}</span>}
+            {error && <span className="text-red-500">{error.email}</span>}
           </div>
 
           <div className="flex flex-col mt-6">
@@ -130,7 +134,7 @@ const Contact = () => {
               placeholder="+234898468833"
               className="mt-2 w-full border-gray-300 border-2 h-10 rounded-md px-3"
             />
-             {error && <span className="text-red-500">{error.phone}</span>}
+            {error && <span className="text-red-500">{error.phone}</span>}
           </div>
 
           <div className="flex flex-col mt-6">
@@ -144,10 +148,15 @@ const Contact = () => {
               onChange={handleChange}
               className="mt-2 w-full border-gray-300 border-2 h-10 rounded-md px-3"
             ></textarea>
-             {error && <span className="text-red-500">{error.message}</span>}
+            {error && <span className="text-red-500">{error.message}</span>}
           </div>
 
-          <button type="submit" className="bg-[#f59e0b] w-full py-3 cursor-pointer rounded-md mt-4 text-white text-[18px]">Send Message</button>
+          <button
+            type="submit"
+            className="bg-[#f59e0b] w-full py-3 cursor-pointer rounded-md mt-4 text-white text-[18px]"
+          >
+            Send Message
+          </button>
         </form>
       </div>
     </section>
