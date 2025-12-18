@@ -9,16 +9,16 @@ import { testimonials } from "../util/testimonial";
 
 const Testimonial = () => {
   return (
-    <section className="bg-gray-50 w-full pt-10 pb-20 lg:pt-20" id="testimonials">
+    <section className="bg-gray-50 w-full pt-10 pb-10 lg:pb-20 lg:pt-20" id="testimonials">
       <SectionTitle
         title="Testimonials"
         subtitle="See what our PTE students have to say about their study experience"
       />
 
-      <div className="mt-12 px-48">
+      <div className="mt-12 mx-4 lg:px-48 flex  lg:w-full">
         <Swiper
           modules={[Autoplay, Pagination]}
-          spaceBetween={30}
+          spaceBetween={40}
           autoplay={{
             delay: 4000,
             disableOnInteraction: false,

@@ -12,7 +12,7 @@ const TestimonialCard = ({
   testimony,
 }: TestimonialCardProps) => {
   return (
-    <div className=" bg-white p-7 rounded-md shadow-2xs">
+    <div className="bg-white p-6 md:p-7 rounded-md shadow-sm mb-14 w-100 lg:w-full">
       <div className="flex gap-4">
         <div className="">
           <img src={userImg} alt="image" className="w-18 h-18 object-cover rounded-[100%]" />
