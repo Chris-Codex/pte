@@ -6,7 +6,7 @@ import { GoClock } from "react-icons/go";
 
 const Classes = () => {
   return (
-    <section className="bg-gray-50 w-full pt-10 pb-20 md:pt-20 lg:pt-20" id="upcoming">
+    <section className="bg-gray-100 w-full pt-10 pb-20 md:pt-20 lg:pt-20" id="upcoming">
       <SectionTitle
         title="Upcoming Classes"
         subtitle="Join our next sessions and accelerate your PTE preparation"

@@ -7,6 +7,7 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import Services from './components/Services'
+import Testimonial from './components/Testimonials'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <About />
       <Services />
       <ChooseUs />
+      <Testimonial />
       <Classes />
       <Contact />
       <Footer />
